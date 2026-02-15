@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Auction Upload</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="auction-body">
+
+<h2>Welcome to Auction Portal</h2>
+
+<div class="letter-box">
+    <p>
+        Dear user <span id="userCode"></span>, we have received your request 
+        on the job you applied for.
+    </p>
+
+    <p>
+        Since you already have a reference code, we have created 
+        an account for you to auction your work.
+    </p>
+
+    <p>
+        Kindly note that bids will determine whether you get paid.
+        All payments are between you and your employer.
+    </p>
+
+    <p>
+        If an employer refuses to cooperate, report to admin.
+    </p>
+</div>
+
+<label>
+    <input type="checkbox" id="confirmRead">
+    I confirm I have read the welcoming letter
+</label>
+
+<br><br>
+
+<input type="file" id="fileUpload">
+<br><br>
+
+<input type="number" id="priceTag" placeholder="Enter price in USD">
+<br><br>
+
+<button id="auctionBtn">Auction</button>
+
+<hr style="margin: 40px 0;">
+
+<!-- Kill Section -->
+<div id="exitSection" style="text-align:center; margin-top: 20px;">
+    <p style="font-weight: bold;">
+        Please leave your email address to enable us to notify you when an employer finds interest in your work.
+    </p>
+
+    <input 
+        type="email" 
+        id="userEmail" 
+        placeholder="Enter your email address"
+        style="padding:10px; width:250px; margin-top:10px;"
+        required
+    >
+
+    <br><br>
+
+    <button 
+        onclick="closeSite()" 
+        style="padding:10px 20px; background-color:red; color:white; border:none; cursor:pointer;"
+    >
+        Kill Site
+    </button>
+</div>
+
+<script src="auction.js"></script>
+
+<script>
+function closeSite() {
+    const email = document.getElementById("userEmail").value;
+
+    if (email === "") {
+        alert("Please enter your email address before closing the site.");
+        return;
+    }
+
+    // Basic email validation
+    const emailPattern = /^[^ ]+@[^ ]+\.[a-z]{2,3}$/;
+    if (!email.match(emailPattern)) {
+        alert("Please enter a valid email address.");
+        return;
+    }
+
+    alert("Thank you! We will notify you if an employer shows interest.");
+
+    // Attempt to close the window
+    try {
+        window.open('', '_self');
+        window.close();
+    } catch (e) {
+        // If browser blocks closing, hide content
+        document.body.innerHTML = "<h1 style='text-align:center; margin-top:50px;'>Session Closed</h1><p style='text-align:center;'>Thank you.</p>";
+    }
+}
+</script>
+
+</body>
+</html>
